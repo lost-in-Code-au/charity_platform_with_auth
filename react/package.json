@@ -4,13 +4,17 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "keywords": [],
   "author": "Reece Jones",
   "license": "ISC",
   "dependencies": {
+    "app-config": "^1.0.0",
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
     "express": "^4.13.4",
+    "express-session": "^1.15.5",
     "mongodb": "^2.2.31",
     "mongoose": "^4.11.9",
     "passport": "^0.4.0",
