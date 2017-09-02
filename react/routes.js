@@ -1,54 +1,64 @@
-var passport = require('passport')
-var Account = require('./models/account')
+const passport = require('passport')
+const Account = require('./models/account')
 
 module.exports = function (app) {
 
-  // app.get('/', function (req, res) {
-  //     res.render('index', { user : req.user })
-  // })
-
-  // app.get('/register', function(req, res) {
-  //     res.render('register', { })
-  // })
-
   app.post('/register', function(req, res) {
-    console.log(req.body.email);
+    console.log(req.body.email)
     Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
-        if (err) {
-            //return res.render('register', { account : account })
-            console.log(err);
-            res.status(401);
-            res.send();
-        }
+      if (err) {
+        console.log("--- you have NOT registered, something was typed wrong ---")
+        console.log(err)
+        res.sendStatus(401)
+      }
 
-        passport.authenticate('local')(req, res, function () {
-          res.send();
-          // res.redirect('/')
-        })
+      passport.authenticate('local')(req, res, function () {
+        console.log("--- you HAVE registered ---")
+        res.json({email: req.user.username, id: req.user._id})
+      })
     })
   })
 
   app.get('/amiloggedin',  function(req, res) {
-        if(req.isAuthenticated()) {
-          res.status(200);
-        }else {
-          res.status(401);
-        }
-        res.send();
+    console.log(req.body.username)
+    if(req.isAuthenticated()) {
+      console.log("--- you ARE still logged in of backEnd ---")
+      res.json({email: req.user.username, id: req.user._id})
+    }else {
+      console.log("--- you are NOT still logged in of backEnd ---")
+      res.sendStatus(401)
+    }
   })
 
-  app.post('/login', passport.authenticate('local'), function(req, res) {
-      res.send(200);
-      res.send();
+  app.post('/signin', passport.authenticate('local'), function(req, res) {
+    console.log("--- you HAVE logged into backEnd ---")
+    res.json({email: req.user.username, id: req.user._id})
   })
 
-  app.get('/logout', function(req, res) {
-      req.logout()
-      res.send();
+  app.get('/signout', function(req, res) {
+    console.log("--- you HAVE logged out of backEnd ---")
+    req.logout()
+    res.send()
   })
 
   app.get('/ping', function(req, res){
-      res.send("pong!", 200)
+    res.sendStatus("--- pong! server running fine :) ---", 200)
+  })
+
+  ///////////////////////api for memberCampaigns below//////////
+
+  app.get('/api/member_campaigns', function(req, res){
+    res.json({title: req.body._id, image: req.body.image, description: req.body.description})
+
+    console.log(req.body._id)
+    // if(req.isAuthenticated()) {
+    //   console.log("--- you ARE logged in ---")
+    //
+    //   res.json({email: req.user.username, id: req.user._id})
+    // }else {
+    //   console.log("--- you are NOT logged in ---")
+    //   res.sendStatus(401)
+    // }
   })
 
 }
