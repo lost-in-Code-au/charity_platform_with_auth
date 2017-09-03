@@ -24,7 +24,7 @@ class SignUp extends React.Component {
     request.withCredentials = true
 
     request.onload = () => {
-      if(request.status === 201){
+      if(request.status === 200){
         const user = JSON.parse(request.responseText)
         this.props.onSignUp(user)
       }

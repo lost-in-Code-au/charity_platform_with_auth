@@ -2,6 +2,7 @@ import React from 'react'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 import SignOut from './SignOut'
+import Popup from 'react-popup'
 
 class LoginBox extends React.Component {
 
@@ -12,7 +13,7 @@ class LoginBox extends React.Component {
       currentUser: null
     }
   }
-
+  
   setUser(user){
     this.setState({currentUser:user, favlist:[]})
   }
@@ -36,7 +37,6 @@ class LoginBox extends React.Component {
         console.log(request.responseText)
         this.setUser(null)
       }
-
     }
 
     request.send()
@@ -49,6 +49,7 @@ class LoginBox extends React.Component {
     this.fetchUser()
   }
 
+  //var mainDiv cannot be changed into a const(why I do not know)
   render () {
       var mainDiv = <div>
         <h4> Please Sign In/Up </h4>
