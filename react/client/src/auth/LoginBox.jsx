@@ -30,11 +30,11 @@ class LoginBox extends React.Component {
     request.onload = () => {
 
       if(request.status === 200){
-        console.log('request.responseText', request.responseText)
+        console.log('request.responseText: ', request.responseText)
         const recieveredUser = JSON.parse(request.responseText)
         this.setUser(recieveredUser)
-      } else {
-        console.log(request.responseText)
+      } else  if (request.status === 401){
+        console.log('Unauthorized user')
         this.setUser(null)
       }
 

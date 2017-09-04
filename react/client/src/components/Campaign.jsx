@@ -2,7 +2,6 @@ import React from 'react'
 import { string, number } from 'prop-types'
 
 const Campaign = (props) => {
-  console.log(props)
   return (
     <div className='campaign'>
       <img src={`images/${props.image}`} className='campaign-image' />
