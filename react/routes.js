@@ -1,5 +1,6 @@
 var passport = require('passport')
 var Account = require('./models/account')
+var Campaign = require('./models/campaign')
 
 module.exports = function (app) {
 
@@ -13,7 +14,9 @@ module.exports = function (app) {
 
   app.post('/register', function(req, res) {
     console.log(req.body.email);
-    Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
+    Account.register(new Account({
+      username : req.body.username
+    }), req.body.password, function(err, account) {
         if (err) {
             //return res.render('register', { account : account })
             console.log(err);
@@ -49,6 +52,33 @@ module.exports = function (app) {
 
   app.get('/ping', function(req, res){
       res.send("pong!", 200)
+  })
+
+  ////campaign routes////
+
+  app.post('/campaigns', function(req, res){
+    console.log(req.body.title)
+
+    Campaign.campaigns(new Campaign({
+      title: req.body.title,
+      description: req.body.description
+    }), function(err, campaign){
+      if(err){
+        console.log(err)
+        res.status(401)
+        res.send()
+      } else {
+        res.json({ result: "Campaign Added", title: req.body.title })
+      }
+    })//TODO: how to get this going?? get fontend to add this
+
+    // var streetChange = new Campaign({
+    //   title: "streetChange",
+    //   description: "To help a little, a lot"
+    // })//TODO: take out once input on insom end is made
+    //
+    // streetChange.save()
+
   })
 
 }
