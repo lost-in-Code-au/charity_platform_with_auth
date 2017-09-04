@@ -14,7 +14,7 @@ class SignOut extends React.Component{
     request.setRequestHeader("Content-Type", "application/json")
     request.withCredentials = true
     request.onload = () => {
-      if(request.status === 204) {
+      if(request.status === 200) {
         this.props.onSignOut(null)
       }
     }

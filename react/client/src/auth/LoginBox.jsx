@@ -2,6 +2,7 @@ import React from 'react'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 import SignOut from './SignOut'
+import Popup from 'react-popup'
 
 class LoginBox extends React.Component {
 

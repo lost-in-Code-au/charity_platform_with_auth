@@ -25,7 +25,14 @@ class Listing extends React.Component {
        if(request.status === 200){
         console.log("request: ", request.responseText)
         var data = JSON.parse(request.responseText)
-        this.setState( { Campaigns: data } )
+
+        var newCampaigns = [...this.state.Campaigns]
+
+        for (let key in data) {
+          newCampaigns.push(data[key]);
+        }
+
+        this.setState( { Campaigns: newCampaigns } )
        } else{
         console.log("Uh oh you're not logged in!")
         this.props.history.goBack()
@@ -39,6 +46,17 @@ class Listing extends React.Component {
   }
 
   render(){
+    // console.log(this.state.Campaigns)
+
+    const filtered = this.state.Campaigns.filter((campaign) => `${campaign.title} ${campaign.description}`.toUpperCase().indexOf(this.state.searchQuery.toUpperCase()) >= 0)
+
+    console.log('filtered:', filtered[0]);
+
+    const campaigns = filtered.map((campaign, index) => {
+      return <Campaign { ...campaign } key={ index }/>
+    })
+    console.log('compaigns:', campaigns)
+
     return(
       <div className="listing">
         <nav>
@@ -48,11 +66,7 @@ class Listing extends React.Component {
 
         <div className='campaigns-container'>
           {
-            this.state.Campaigns.filter((campaign) => `${campaign.title} ${campaign.description}`.toUpperCase().indexOf(this.state.searchQuery.toUpperCase()) >= 0)
-             .map((campaign) => (
-              <Campaign { ...campaign } key={campaign.programmeID}/>
-            ))
-
+            campaigns
           }
         </div>
 

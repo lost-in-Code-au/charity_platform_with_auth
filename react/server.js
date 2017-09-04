@@ -28,10 +28,6 @@ passport.use(new LocalStrategy(Account.authenticate()))
 passport.serializeUser(Account.serializeUser())
 passport.deserializeUser(Account.deserializeUser())
 
-// var Campaign = require('./models/campaign')
-// TODO: create a way to save and use a new database within mongoose
-
-
 // mongoose
 mongoose.connect('mongodb://localhost/passport_local_mongoose')
 
