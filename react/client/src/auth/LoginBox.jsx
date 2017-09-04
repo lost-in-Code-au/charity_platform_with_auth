@@ -16,6 +16,7 @@ class LoginBox extends React.Component {
 
   setUser(user){
     this.setState({currentUser:user, favlist:[]})
+    console.log("this setUser = ", this.user)
   }
 
   fetchUser(){
@@ -30,7 +31,7 @@ class LoginBox extends React.Component {
     request.onload = () => {
 
       if(request.status === 200){
-        console.log('request.responseText: ', request.responseText)
+        console.log('request.responseText: ', request)
         const recieveredUser = JSON.parse(request.responseText)
         this.setUser(recieveredUser)
       } else  if (request.status === 401){
@@ -47,6 +48,7 @@ class LoginBox extends React.Component {
   }
 
   componentDidMount(){
+    // console.log("componentDidMount: fetchUser = ", this.fetchUser)
     this.fetchUser()
   }
 
