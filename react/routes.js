@@ -33,9 +33,10 @@ module.exports = function (app) {
 
   app.get('/amiloggedin',  function(req, res) {
         if(req.isAuthenticated()) {
-          res.status(200);
+          res.status(200)
+          res.json()
         }else {
-          res.status(401);
+          res.status(401)
         }
         res.send();
   })
