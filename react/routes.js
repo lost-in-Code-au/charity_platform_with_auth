@@ -48,9 +48,9 @@ module.exports = function (app) {
   ///////////////////////api for memberCampaigns below//////////
 
   app.get('/api/member_campaigns', function(req, res){
-    res.json({title: req.body._id, image: req.body.image, description: req.body.description})
+    // res.json({title: req.body._id, image: req.body.image, description: req.body.description})
 
-    console.log(req.body._id)
+    console.log(res.responseText)
     // if(req.isAuthenticated()) {
     //   console.log("--- you ARE logged in ---")
     //

@@ -9,8 +9,8 @@ const Home = () => (
       <h1 className='title'>CodeForChange</h1>
       <LoginBox url="http://localhost:3000/" />
     </div>
-    
-    <div className="member-campaigns">
+
+    <div className="campaigns">
       <Listing />
     </div>
   </div>
