@@ -23,10 +23,19 @@ app.use(express.static(path.join(__dirname, 'client/build')))
 
 
 // passport config
-var Account = require('./models/account');
+var Account = require('./models/account')
 passport.use(new LocalStrategy(Account.authenticate()))
 passport.serializeUser(Account.serializeUser())
 passport.deserializeUser(Account.deserializeUser())
+
+// var Campaign = require('./models/account').campaign
+///////////////~~ do not use!!!~~/////////////////
+// passport.use(new LocalStrategy(Campaign.authenticate()))
+// passport.serializeUser(Campaign.serializeUser())
+// passport.deserializeUser(Campaign.deserializeUser())
+//////////////////////////////////////////////////////
+// TODO: create a way to save and use a new database within mongoose
+
 
 // mongoose
 mongoose.connect('mongodb://localhost/passport_local_mongoose')
@@ -37,22 +46,3 @@ require('./routes')(app)
 app.listen(app.get('port'), function(){
   console.log(("Express server listening on port " + app.get('port')))
 })
-
-
-// var express = require('express');
-// var app = express();
-// var path = require('path')
-//
-// app.get('/', function (req, res) {
-//   res.sendFile(path.join(__dirname + '/client/build/index.html'));
-// });
-//
-// app.use(express.static('client/build'));
-//
-//
-// var server = app.listen(3000, function () {
-//   var host = server.address().address;
-//   var port = server.address().port;
-//
-//   console.log('Example app listening at http://%s:%s', host, port);
-// });
