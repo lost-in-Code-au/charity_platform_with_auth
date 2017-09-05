@@ -22,7 +22,6 @@ class SignIn extends React.Component {
   }
 
   signIn(event){
-    console.log(this.state.email)//as far as I got :|
     event.preventDefault()
     const request = new XMLHttpRequest()
     request.open("POST", this.props.url + "login")
@@ -42,7 +41,6 @@ class SignIn extends React.Component {
     }
 
     request.send(JSON.stringify(body))
-    // sign in request here
   }
 
   render() {

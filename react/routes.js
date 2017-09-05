@@ -4,8 +4,10 @@ var Campaign = require('./models/campaign')
 
 module.exports = function (app) {
 
+  ////user acount routes////
+
+  ////register user with encryption
   app.post('/register', function(req, res) {
-    console.log(req.body.email)
     Account.register(new Account({
       username : req.body.username
     }), req.body.password, function(err, account) {
@@ -21,42 +23,50 @@ module.exports = function (app) {
     })
   })
 
+  ////test user is logged in
   app.get('/amiloggedin',  function(req, res) {
     if(req.isAuthenticated()) {
-      res.status(200)
-      res.json()
+      res.json(req.user)
     }else {
       res.status(401)
     }
-    res.send();
   })
 
+  ////login user
   app.post('/login', passport.authenticate('local'), function(req, res) {
-    res.send(200)
-    res.send()
+    Account.find({
+      username: req.body.username
+    }, (err, account) => {
+      res.json({account: account})
+    })
   })
 
+  ////logout user
   app.get('/logout', function(req, res) {
     req.logout()
     res.send()
   })
 
+  //test server
   app.get('/ping', function(req, res){
     res.send("pong!", 200)
   })
 
+  ///////////////////////
+
   ////campaign routes////
 
-  //create new campaign
+  ////create new campaign
   app.post('/campaigns', function(req, res){
     console.log(req.body.title)
 
-    var streetChange = new Campaign({
+    Campaign({
       title: req.body.title,
+      img: reg.body.img,
       description: req.body.description
     })//TODO: take out once input on insom end is made
 
-    streetChange.save()
+    Campaign.save()
 
     // Campaign.campaigns(new Campaign({
     //   title: req.body.title,
@@ -74,7 +84,7 @@ module.exports = function (app) {
 
   })
 
-  //get all campaigns
+  ////get all campaigns
   app.get('/campaigns', function(req, res) {
     Campaign.find({}, function(err, users) {
       var campaignMap = {}
