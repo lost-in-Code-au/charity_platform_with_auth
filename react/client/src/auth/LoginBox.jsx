@@ -14,6 +14,7 @@ class LoginBox extends React.Component {
     }
   }
 
+
   setUser(user){
     this.setState({currentUser:user})
   }
@@ -51,7 +52,7 @@ class LoginBox extends React.Component {
       </div>
       if(this.state.currentUser){
         mainDiv = <div>
-          <h4> Welcome {this.state.currentUser.email}</h4>
+          <h4> Welcome {this.state.currentUser.username}</h4>
           <SignOut url={this.props.url} onSignOut={this.setUser}></SignOut>
         </div>
       }
