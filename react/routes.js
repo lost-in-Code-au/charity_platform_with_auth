@@ -47,41 +47,31 @@ module.exports = function (app) {
     res.send()
   })
 
+  /////////////////////// end of users routes//////////////////////
+
+
   //test server
   app.get('/ping', function(req, res){
     res.send("pong!", 200)
   })
 
-  ///////////////////////
 
   ////campaign routes////
 
   ////create new campaign
-  app.post('/campaigns', function(req, res){
-    console.log(req.body.title)
+  app.post('/campaigns', function(req, res, next){
 
-    Campaign({
+    var newCampaign = new Campaign({
       title: req.body.title,
-      img: reg.body.img,
+      image: req.body.image,
       description: req.body.description
-    })//TODO: take out once input on insom end is made
-
-    Campaign.save()
-
-    // Campaign.campaigns(new Campaign({
-    //   title: req.body.title,
-    //   description: req.body.description
-    // }), function(err, campaign){
-    //   if(err){
-    //     console.log(err)
-    //     res.status(401)
-    //     res.send()
-    //   } else {
-    //     res.json({ result: "Campaign Added", title: req.body.title })
-    //   }
-    // })//TODO: how to get this going?? get fontend to add this
-
-
+    })
+    newCampaign.save(function (err, post) {
+      if (err) {
+        return next(err)
+      }
+      res.json(201, post)
+    })
   })
 
   ////get all campaigns
