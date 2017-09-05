@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, Router } from 'react-router-dom'
-import MemberCampaigns from './MemberCampaigns.jsx'
+import Campaign from './Campaign.jsx'
+
 
 class Listing extends React.Component {
 
@@ -9,12 +10,13 @@ class Listing extends React.Component {
     this.doSearch = this.doSearch.bind(this)
     this.state = {
       searchQuery: '',
-      memberCampaigns: []
+      Campaigns: []
     }
   }
 
   componentDidMount(){
-    var url = 'http://localhost:3000/api/member_campaigns'
+
+    var url = 'http://localhost:3000/campaigns'
     var request = new XMLHttpRequest()
     request.open('GET', url)
 
@@ -23,9 +25,16 @@ class Listing extends React.Component {
 
     request.onload = () => {
        if(request.status === 200){
-        console.log("request: ", request.responseText)
+        // console.log("request: ", request.responseText)//TODO: remove after images are done
         var data = JSON.parse(request.responseText)
-        this.setState( { memberCampaigns: data } )
+
+        var newCampaigns = [...this.state.Campaigns]
+
+        for (let key in data) {
+          newCampaigns.push(data[key]);
+        }
+
+        this.setState( { Campaigns: newCampaigns } )
        } else{
         console.log("Uh oh you're not logged in!")
         this.props.history.goBack()
@@ -39,6 +48,14 @@ class Listing extends React.Component {
   }
 
   render(){
+    // console.log(this.state.Campaigns)//TODO: remove after images are done
+
+    const filtered = this.state.Campaigns.filter((campaign) => `${campaign.title} ${campaign.description}`.toUpperCase().indexOf(this.state.searchQuery.toUpperCase()) >= 0)
+
+    const campaigns = filtered.map((campaign, index) => {
+      return <Campaign { ...campaign } key={ index }/>
+    })
+    // console.log('campaigns:', campaigns)//TODO: remove after images are done
     return(
       <div className="listing">
         <nav>
@@ -46,13 +63,10 @@ class Listing extends React.Component {
           <input className='search-box' type='text' placeholder='Search...' value={this.state.searchQuery} onChange={this.doSearch} />
         </nav>
 
-        <div className='member-campaigns-container'>
-          {
-            this.state.memberCampaigns.filter((campaigns) => `${campaigns.title} ${campaigns.description}`.toUpperCase().indexOf(this.state.searchQuery.toUpperCase()) >= 0)
-             .map((campaigns) => (
-              <MemberCampaigns { ...campaigns } key={campaigns.programmeID}/>
-            ))
 
+        <div className='campaigns-container'>
+          {
+            campaigns
           }
         </div>
 

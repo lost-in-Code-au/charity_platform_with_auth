@@ -10,3 +10,13 @@ li {
 a {
   display: none;
 }
+
+
+.campaign-image {
+  max-width: 400px;
+  max-height: 305px;
+}
+
+.campaigns-container {
+  display: inline-flex;
+}

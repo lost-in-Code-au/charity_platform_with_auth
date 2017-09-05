@@ -1,64 +1,89 @@
-const passport = require('passport')
-const Account = require('./models/account')
+var passport = require('passport')
+var Account = require('./models/account')
+var Campaign = require('./models/campaign')
 
 module.exports = function (app) {
 
+  ////user acount routes////
+
+  ////register user with encryption
   app.post('/register', function(req, res) {
-    console.log(req.body.email)
-    Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
+    Account.register(new Account({
+      username : req.body.username
+    }), req.body.password, function(err, account) {
       if (err) {
-        console.log("--- you have NOT registered, something was typed wrong ---")
-        console.log(err)
-        res.sendStatus(401)
+          console.log(err)
+          res.status(401)
+          res.send()
       }
 
-      passport.authenticate('local')(req, res, function () {
-        console.log("--- you HAVE registered ---")
-        res.json({email: req.user.username, id: req.user._id})
+    passport.authenticate('local')(req, res, function () {
+        res.send()
       })
     })
   })
 
+  ////test user is logged in
   app.get('/amiloggedin',  function(req, res) {
-    console.log(req.body.username)
     if(req.isAuthenticated()) {
-      console.log("--- you ARE still logged in of backEnd ---")
-      res.json({email: req.user.username, id: req.user._id})
+      res.json(req.user)
     }else {
-      console.log("--- you are NOT still logged in of backEnd ---")
-      res.sendStatus(401)
+      res.status(401)
     }
   })
 
-  app.post('/signin', passport.authenticate('local'), function(req, res) {
-    console.log("--- you HAVE logged into backEnd ---")
-    res.json({email: req.user.username, id: req.user._id})
+  ////login user
+  app.post('/login', passport.authenticate('local'), function(req, res) {
+    Account.find({
+      username: req.body.username
+    }, (err, account) => {
+      res.json({account: account})
+    })
   })
 
-  app.get('/signout', function(req, res) {
-    console.log("--- you HAVE logged out of backEnd ---")
+  ////logout user
+  app.get('/logout', function(req, res) {
     req.logout()
     res.send()
   })
 
+  /////////////////////// end of users routes//////////////////////
+
+
+  //test server
   app.get('/ping', function(req, res){
-    res.sendStatus("--- pong! server running fine :) ---", 200)
+    res.send("pong!", 200)
   })
 
-  ///////////////////////api for memberCampaigns below//////////
 
-  app.get('/api/member_campaigns', function(req, res){
-    // res.json({title: req.body._id, image: req.body.image, description: req.body.description})
+  ////campaign routes////
 
-    console.log(res.responseText)
-    // if(req.isAuthenticated()) {
-    //   console.log("--- you ARE logged in ---")
-    //
-    //   res.json({email: req.user.username, id: req.user._id})
-    // }else {
-    //   console.log("--- you are NOT logged in ---")
-    //   res.sendStatus(401)
-    // }
+  ////create new campaign
+  app.post('/campaigns', function(req, res, next){
+
+    var newCampaign = new Campaign({
+      title: req.body.title,
+      image: req.body.image,
+      description: req.body.description
+    })
+    newCampaign.save(function (err, post) {
+      if (err) {
+        return next(err)
+      }
+      res.json(201, post)
+    })
   })
 
+  ////get all campaigns
+  app.get('/campaigns', function(req, res) {
+    Campaign.find({}, function(err, users) {
+      var campaignMap = {}
+
+      users.forEach(function(campaign) {
+        campaignMap[campaign._id] = campaign
+      })
+
+      res.send(campaignMap)
+    })
+  })
 }
