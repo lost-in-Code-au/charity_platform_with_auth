@@ -24,7 +24,7 @@ class SignIn extends React.Component {
   signIn(event){
     event.preventDefault()
     const request = new XMLHttpRequest()
-    request.open("POST", this.props.url + "login")
+    request.open("POST", this.props.url + "signin")
     request.setRequestHeader("Content-Type", "application/json")
     request.withCredentials = true
 

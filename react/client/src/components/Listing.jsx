@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, Router } from 'react-router-dom'
 import Campaign from './Campaign.jsx'
 
+
 class Listing extends React.Component {
 
   constructor(props) {
@@ -14,6 +15,7 @@ class Listing extends React.Component {
   }
 
   componentDidMount(){
+
     var url = 'http://localhost:3000/campaigns'
     var request = new XMLHttpRequest()
     request.open('GET', url)
@@ -60,6 +62,7 @@ class Listing extends React.Component {
           <Link to='/' className='title'>GivingWeb</Link>
           <input className='search-box' type='text' placeholder='Search...' value={this.state.searchQuery} onChange={this.doSearch} />
         </nav>
+
 
         <div className='campaigns-container'>
           {

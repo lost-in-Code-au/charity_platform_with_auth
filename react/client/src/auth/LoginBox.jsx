@@ -13,7 +13,7 @@ class LoginBox extends React.Component {
       currentUser: null
     }
   }
-
+  
   setUser(user){
     this.setState({currentUser:user})
   }
@@ -32,7 +32,6 @@ class LoginBox extends React.Component {
       } else  if (request.status === 401){
         this.setUser(null)
       }
-
     }
 
     request.send()
@@ -43,6 +42,7 @@ class LoginBox extends React.Component {
     this.fetchUser()
   }
 
+  //var mainDiv cannot be changed into a const(why I do not know)
   render () {
       var mainDiv = <div>
         <h4> Please Sign In/Up </h4>

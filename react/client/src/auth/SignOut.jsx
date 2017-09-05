@@ -10,7 +10,7 @@ class SignOut extends React.Component{
 
   signOut(event){
     const request = new XMLHttpRequest()
-    request.open("DELETE", this.props.url + "logout")
+    request.open("GET", this.props.url + "signout")
     request.setRequestHeader("Content-Type", "application/json")
     request.withCredentials = true
     request.onload = () => {
