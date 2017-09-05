@@ -41,6 +41,7 @@ class SignIn extends React.Component {
     }
 
     request.send(JSON.stringify(body))
+    // sign in request here
   }
 
   render() {

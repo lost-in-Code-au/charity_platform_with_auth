@@ -15,10 +15,12 @@ class LoginBox extends React.Component {
   }
   
   setUser(user){
-    this.setState({currentUser:user})
+    this.setState({currentUser:user, favlist:[]})
   }
 
   fetchUser(){
+    console.log('fetchUser')
+
     const request = new XMLHttpRequest()
     request.open("GET", this.props.url + "amiloggedin")
     request.setRequestHeader("Content-Type", "application/json")
@@ -26,16 +28,21 @@ class LoginBox extends React.Component {
     request.withCredentials = true
 
     request.onload = () => {
+
       if(request.status === 200){
+        console.log('request.responseText', request.responseText)
         const recieveredUser = JSON.parse(request.responseText)
         this.setUser(recieveredUser)
-      } else  if (request.status === 401){
+      } else {
+        console.log(request.responseText)
         this.setUser(null)
       }
     }
 
     request.send()
-    // update to promises
+
+    // Fetch current user here
+    // update for promieses
   }
 
   componentDidMount(){
