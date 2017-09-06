@@ -11,10 +11,20 @@ a {
   display: none;
 }
 
+
+#pre-load {
+  padding-top: 300px;
+    text-align: center;
+}
+
 .nav-header {
   display: inline-flex;
   background-color: #344;
   width: 100%;
+}
+
+.login-container {
+  float: right;
 }
 
 .listing {
@@ -28,9 +38,15 @@ a {
 
 .campaigns-container {
   display: inline-flex;
+  max-width: 100%;
+  overflow: scroll;
 }
 
 .campaign {
   padding: 10px;
   text-align: center;
+}
+
+.campaigns {
+
 }

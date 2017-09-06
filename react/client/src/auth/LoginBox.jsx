@@ -43,13 +43,13 @@ class LoginBox extends React.Component {
   }
 
   render () {
-      var mainDiv = <div>
+      var mainDiv = <div className='login-container'>
         <h4> Please Sign In/Up </h4>
         <SignIn url={this.props.url} onSignIn={this.setUser}></SignIn>
         <SignUp url={this.props.url} onSignUp={this.setUser}></SignUp>
       </div>
       if(this.state.currentUser){
-        mainDiv = <div>
+        mainDiv = <div className='login-container'>
           <h4> Welcome {this.state.currentUser.username}</h4>
           <SignOut url={this.props.url} onSignOut={this.setUser}></SignOut>
         </div>
