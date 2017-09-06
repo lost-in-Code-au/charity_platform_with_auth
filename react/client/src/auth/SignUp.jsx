@@ -36,8 +36,7 @@ class SignUp extends React.Component {
     }
 
     request.send(JSON.stringify(body))
-    // sign up request here
-  }
+  }//TODO: refactor to promises
 
   handleOnChangeEmail(event) {
     this.setState({email: event.target.value})

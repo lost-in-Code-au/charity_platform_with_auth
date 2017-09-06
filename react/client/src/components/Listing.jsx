@@ -39,7 +39,7 @@ class Listing extends React.Component {
        }
     }
     request.send(null)
-  }
+  }//TODO: refactor to promises
 
   doSearch(event){
     this.setState({searchQuery: event.target.value})

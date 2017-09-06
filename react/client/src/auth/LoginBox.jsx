@@ -36,8 +36,7 @@ class LoginBox extends React.Component {
     }
 
     request.send()
-    // update to promises
-  }
+  }//TODO: refactor to promises
 
   componentDidMount(){
     this.fetchUser()
@@ -51,7 +50,7 @@ class LoginBox extends React.Component {
       </div>
       if(this.state.currentUser){
         mainDiv = <div>
-          <h4> Welcome {this.state.currentUser.email}</h4>
+          <h4> Welcome {this.state.currentUser.username}</h4>
           <SignOut url={this.props.url} onSignOut={this.setUser}></SignOut>
         </div>
       }
