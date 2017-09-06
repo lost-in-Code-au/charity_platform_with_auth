@@ -1,6 +1,5 @@
 var path = require('path')
 var express = require('express')
-var http = require('http')
 var bodyParser = require('body-parser')
 var expressSession = require('express-session')
 var cookieParser = require('cookie-parser')

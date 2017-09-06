@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Router } from 'react-router-dom'
+// import { Link, Router } from 'react-router-dom'//react-roter
 import Campaign from './Campaign.jsx'
 
 class Listing extends React.Component {
@@ -54,7 +54,7 @@ class Listing extends React.Component {
     return(
       <div className="listing">
         <nav>
-          <Link to='/' className='title'>GivingWeb</Link>
+          {/* <Link to='/' className='title'>GivingWeb</Link> */}
           <input className='search-box' type='text' placeholder='Search...' value={this.state.searchQuery} onChange={this.doSearch} />
         </nav>
 

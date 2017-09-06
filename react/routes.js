@@ -86,4 +86,5 @@ module.exports = function (app) {
       res.send(campaignMap)
     })
   })
+
 }

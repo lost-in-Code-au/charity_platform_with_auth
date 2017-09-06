@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 class SignOut extends React.Component{
 
@@ -28,7 +27,6 @@ class SignOut extends React.Component{
     return (
        <div>
         <button onClick={this.signOut}>Sign Out</button>
-        <Link className='shows-link' to='/shows'>View Shows</Link>
       </div>
     )
   }

@@ -14,7 +14,7 @@ a {
 
 #pre-load {
   padding-top: 300px;
-    text-align: center;
+  text-align: center;
 }
 
 .nav-header {
@@ -40,6 +40,10 @@ a {
   display: inline-flex;
   max-width: 100%;
   overflow: scroll;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 .campaign {
