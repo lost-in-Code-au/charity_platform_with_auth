@@ -11,6 +11,15 @@ a {
   display: none;
 }
 
+.nav-header {
+  display: inline-flex;
+  background-color: #344;
+  width: 100%;
+}
+
+.listing {
+  padding: 10px;
+}
 
 .campaign-image {
   max-width: 400px;
@@ -19,4 +28,9 @@ a {
 
 .campaigns-container {
   display: inline-flex;
+}
+
+.campaign {
+  padding: 10px;
+  text-align: center;
 }

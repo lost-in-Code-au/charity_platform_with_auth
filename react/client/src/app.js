@@ -1,4 +1,5 @@
 import React from 'react'
+import Popup from 'react-popup'
 import ReactDOM from 'react-dom'
 import Home from './components/Home'
 import Listing from './components/Listing'
