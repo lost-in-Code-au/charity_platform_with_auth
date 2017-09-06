@@ -23,7 +23,6 @@ class Listing extends React.Component {
 
     request.onload = () => {
        if(request.status === 200){
-        // console.log("request: ", request.responseText)//TODO: remove after images are done
         var data = JSON.parse(request.responseText)
 
         var newCampaigns = [...this.state.Campaigns]
@@ -46,14 +45,12 @@ class Listing extends React.Component {
   }
 
   render(){
-    // console.log(this.state.Campaigns)//TODO: remove after images are done
-
     const filtered = this.state.Campaigns.filter((campaign) => `${campaign.title} ${campaign.description}`.toUpperCase().indexOf(this.state.searchQuery.toUpperCase()) >= 0)
 
     const campaigns = filtered.map((campaign, index) => {
       return <Campaign { ...campaign } key={ index }/>
     })
-    // console.log('campaigns:', campaigns)//TODO: remove after images are done
+
     return(
       <div className="listing">
         <nav>
