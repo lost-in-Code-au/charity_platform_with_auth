@@ -19,10 +19,9 @@ const Home = function () {
       <div>
         <button onClick={() => { console.log("I'm working!!");   Popup.alert(
           <div>
-            <h1 className='title'>CodeForChange</h1>
             <LoginBox url="http://localhost:3000/" />
           </div>
-        ) }} >click me</button>
+        ) }} >Login</button>
       </div>
       <div className="nav-header">
         <h1 className='title'>CodeForChange</h1>
