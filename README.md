@@ -1,5 +1,8 @@
 # CodeForChange
 
+### ---Under constructor as of 20/10/17---
+
+
 ## MVP
 1. #### User account abilities
   - signup
@@ -78,6 +81,11 @@ npm install passport-local --save
 3. mongodb(so js can work with it locally)
 ```sh
 npm install mongodb --save
+
+or
+
+brew install mongodb
+???
 ```
 4. mongoose
 ```sh
