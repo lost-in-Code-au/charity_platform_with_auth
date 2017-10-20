@@ -60,7 +60,7 @@ npm install -g nodemon
 sudo mongod
 ```
 
-ok greate now lets move on to the dependencies we will need to have a signUp/signIn ect
+ok great now lets move on to the dependencies we will need to have a signUp/signIn ect
 <br>
 
 ### Dependencies
